@@ -44,7 +44,7 @@ class GridModel: ObservableObject {
     
     func start(tempo: Double) {
         print("starting timer")
-        playSound(sound: "Clave BamVin", type: "wav")
+        playSound(sound: "kick", type: "wav")
         // To get timer interval in terms of SECONDS:
         // tempo = beats/minute aka BPM, sixteenths/minute = BPM
         // sixteenths/second = (BPM * 4) * (1/60)
@@ -58,7 +58,10 @@ class GridModel: ObservableObject {
             self.bars = self.beats / 4
             self.time = "\(self.bars).\(self.beats % 4).\(self.sixteenths % 16)"
             if self.sixteenths % 4 == 0 {
-                playSound(sound: "Clave BamVin", type: "wav")
+                playSound(sound: "kick", type: "wav")
+            }
+            if ((self.sixteenths + 4) % 8 == 0) {
+                playSound(sound: "clap", type: "wav")
             }
             self.index += 1
             if (self.index == 32) {
